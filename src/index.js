@@ -32,5 +32,5 @@ canvas.addEventListener("mousemove", (event)=>{
 });
 
 canvas.addEventListener("mouseleave", ()=>{mDown = 0;});
-canvas.addEventListener("mousedown", (event)=>{mDown = 1;});
-canvas.addEventListener("mouseup", (event)=>{mDown = 0;});
+canvas.addEventListener("mousedown", ()=>{mDown = 1;});
+canvas.addEventListener("mouseup", ()=>{mDown = 0;});

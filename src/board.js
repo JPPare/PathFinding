@@ -40,7 +40,7 @@ export default class Board{
     } //End drawBoard
 
     getCellFromPos(xPos, yPos){
-        
+
     }
 
     highlightCell(xPos,yPos, cellColor,){
@@ -48,7 +48,7 @@ export default class Board{
         let r = this.canvas.getBoundingClientRect();
         xPos -= 0;//r.top;
         yPos -= 0;//r.left;
-        if(xPos < 0 | yPos < 0 | xPos > this.width | yPos > this.height){console.log("Out of bounds");}
+        if(xPos < 0 || yPos < 0 || xPos > this.width || yPos > this.height){console.log("Out of bounds");}
         else{
             console.log("Highlighting ", xPos-r.top, yPos-r.left);
             this.ctx.fillStyle = cellColor;
@@ -57,7 +57,7 @@ export default class Board{
             let y = Math.floor(yPos/this.gridSize)*this.gridSize;
             this.ctx.fillRect(x,y,this.gridSize, this.gridSize);
             this.ctx.lineWidth = 1;
-            this.ctx.strokeStyle = "black" //Cell Boarder
+            this.ctx.strokeStyle = "black"; //Cell Boarder
             this.ctx.stroke();
         }
     }//End highlightCell
