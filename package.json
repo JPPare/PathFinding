@@ -1,0 +1,16 @@
+{
+  "name": "PathFinding",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test Specified\" && exit 1",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+
+  }
+}
