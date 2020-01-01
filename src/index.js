@@ -17,7 +17,9 @@ function whileMouseDown(event){
     const {x,y} = event.target.getBoundingClientRect();
     let xPos = Math.floor((event.clientX-x)/board.gridSize);
     let yPos = Math.floor((event.clientY-y)/board.gridSize);
-    board.drawWall(xPos, yPos);
+    if(board.isStartSet() === false){board.drawStart(xPos,yPos);}
+    else if(board.isEndSet() === false){board.drawEnd(xPos,yPos);}
+    else {board.drawWall(xPos, yPos);}
 }
 
 canvas.addEventListener("click",(event)=>{

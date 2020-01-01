@@ -6,6 +6,7 @@ export default class Board{
         this.gridSize = grid_Size;
         this.startPos = [null, null]; //x, y
         this.endPos = [null, null];
+        this.currPos = [null, null];
         this.rows = Math.floor(this.height/this.gridSize);
         this.cols = Math.floor(this.width/this.gridSize);
         //Prefill the grid, using 1s just to test clear later.
@@ -21,13 +22,13 @@ export default class Board{
     }//End Constructor
 
     isStartSet(){
-        return (this.startPos[0]==null);
+        return (this.startPos[0]!==null);
     }
     setStartPos(x,y){
         this.startPos = [x,y];
     }
     isEndSet(){
-        return (this.endPos[0]==null);
+        return (this.endPos[0]!==null);
     }
     setEndPos(x,y){
         this.endPos = [x,y];
@@ -55,14 +56,43 @@ export default class Board{
         }
     } //End drawBoard
 
-    getCellFromPos(xPos, yPos){
-
-    }
     //Takes x,y as array grid position
     drawWall(xPos,yPos){
         if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
-        else if(this.grid[xPos][yPos] === this.gridKey.OPENSPACE){
-             this.highlightCell(xPos*this.gridSize, yPos*this.gridSize, "black");
+        else if(xPos !== this.currPos[0] || yPos !== this.currPos[1]){
+            this.currPos = [xPos,yPos];
+            if(this.grid[xPos][yPos] === this.gridKey.OPENSPACE){
+                this.grid[xPos][yPos] = this.gridKey.WALL;
+                 this.highlightCell(xPos*this.gridSize, yPos*this.gridSize, "black");
+            }
+            else if(this.grid[xPos][yPos] === this.gridKey.WALL){
+                 this.clearCell(xPos,yPos);
+            }
+        }
+    }
+
+    drawStart(xPos,yPos){
+        if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
+        else{
+            this.grid[xPos][yPos] = this.gridKey.START;
+            this.startPos = [xPos,yPos];
+            this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#66ff00');
+        }
+    }
+    drawEnd(xPos,yPos){
+        if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
+        else{
+            this.grid[xPos][yPos] = this.gridKey.END;
+            this.endPos = [xPos,yPos];
+            this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#6600ff');
+        }
+    }
+
+    clearCell(xPos,yPos){
+        if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
+        else{
+            this.grid[xPos][yPos] = this.gridKey.OPENSPACE;
+            this.highlightCell(xPos*this.gridSize, yPos*this.gridSize, "grey");
         }
     }
 
@@ -80,6 +110,4 @@ export default class Board{
             this.ctx.stroke();
         }
     }//End highlightCell
-
-
 }//End Board
