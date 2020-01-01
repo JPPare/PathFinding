@@ -15,7 +15,9 @@ board.drawInitBoard();
 //Canvas Event Listeners
 function whileMouseDown(event){
     const {x,y} = event.target.getBoundingClientRect();
-    board.highlightCell(event.clientX-x, event.clientY-y, "Black");
+    let xPos = Math.floor((event.clientX-x)/board.gridSize);
+    let yPos = Math.floor((event.clientY-y)/board.gridSize);
+    board.drawWall(xPos, yPos);
 }
 
 canvas.addEventListener("click",(event)=>{
@@ -23,7 +25,7 @@ canvas.addEventListener("click",(event)=>{
 });
 
 canvas.addEventListener("mousemove", (event)=>{
-   if(mDown == 1) {whileMouseDown(event);}
+   if(mDown === 1) {whileMouseDown(event);}
 });
 
 canvas.addEventListener("mouseleave", ()=>{mDown = 0;});

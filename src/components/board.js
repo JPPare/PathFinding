@@ -4,32 +4,40 @@ export default class Board{
         this.width = areaWidth;
         this.height = areaHeight;
         this.gridSize = grid_Size;
-        this.startPos = [null, null, false]; //x, y, isSet
-        this.endPos = [null, null, false];
+        this.startPos = [null, null]; //x, y
+        this.endPos = [null, null];
         this.rows = Math.floor(this.height/this.gridSize);
         this.cols = Math.floor(this.width/this.gridSize);
+        //Prefill the grid, using 1s just to test clear later.
         this.grid = new Array(this.rows).fill(1).map(() => new Array(this.cols).fill(1));
-
+        this.gridKey = {
+            OPENSPACE:0,
+            WALL: 1,
+            START:2,
+            END:3
+        };
         this.canvas = aCanvas;
         this.ctx = this.canvas.getContext("2d");
     }//End Constructor
 
     isStartSet(){
-        return this.startPos[2];
+        return (this.startPos[0]==null);
     }
     setStartPos(x,y){
-        this.startPos = [x,y,true];
+        this.startPos = [x,y];
     }
     isEndSet(){
-        return this.endPos[2];
+        return (this.endPos[0]==null);
     }
     setEndPos(x,y){
-        this.endPos = [x,y,true];
+        this.endPos = [x,y];
     }
 
     drawInitBoard() {
-        for(let x of this.grid){x.fill(0);} //Reset the grid to all zeros
-        console.log(this.grid);
+        for(let x of this.grid){x.fill(this.gridKey.OPENSPACE);} //Reset the grid to all zeros
+        this.startPos = [null,null];
+        this.endPos = [null,null];
+
         this.ctx.clearRect(0,0, this.width, this.height);
         this.ctx.fillStyle = "grey";
         this.ctx.fillRect(0,0, this.width, this.height);
@@ -50,17 +58,20 @@ export default class Board{
     getCellFromPos(xPos, yPos){
 
     }
+    //Takes x,y as array grid position
+    drawWall(xPos,yPos){
+        if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
+        else if(this.grid[xPos][yPos] === this.gridKey.OPENSPACE){
+             this.highlightCell(xPos*this.gridSize, yPos*this.gridSize, "black");
+        }
+    }
 
     highlightCell(xPos,yPos, cellColor,){
         //Get the canvas boarder so mouse click coords will be relative
-        let r = this.canvas.getBoundingClientRect();
-        xPos -= 0;//r.top;
-        yPos -= 0;//r.left;
         if(xPos < 0 || yPos < 0 || xPos > this.width || yPos > this.height){console.log("Out of bounds");}
         else{
-            //console.log("Highlighting ", xPos-r.top, yPos-r.left);
             this.ctx.fillStyle = cellColor;
-
+            //Round input coords down to nearest cell
             let x = Math.floor(xPos/this.gridSize)*this.gridSize;
             let y = Math.floor(yPos/this.gridSize)*this.gridSize;
             this.ctx.fillRect(x,y,this.gridSize, this.gridSize);
@@ -69,4 +80,6 @@ export default class Board{
             this.ctx.stroke();
         }
     }//End highlightCell
+
+
 }//End Board
