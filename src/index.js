@@ -1,23 +1,18 @@
 
-import Board from "./board";
+import Board from "./components/board";
+import NavBar from "./components/navBar";
 //Get gameScreen area and get height and width from it
 let canvas = document.getElementById("gameScreen");
 let height = parseInt(canvas.getAttribute('height'));
 let width = parseInt(canvas.getAttribute('width'));
+let navBar = document.getElementById("navBar");
 
 let mDown = 0;
 
-//Make sure canvas is clear and fill in background color
-let ctx = canvas.getContext("2d");
-ctx.clearRect(0,0, width, height);
-ctx.fillStyle = "grey";
-ctx.fillRect(0,0, width, height);
-
 let board = new Board(canvas, width, height, 10);
-board.drawBoard();
-board.highlightCell(1,1, '#39ff14');
+board.drawInitBoard();
 
-
+//Canvas Event Listeners
 function whileMouseDown(event){
     const {x,y} = event.target.getBoundingClientRect();
     board.highlightCell(event.clientX-x, event.clientY-y, "Black");
@@ -34,3 +29,6 @@ canvas.addEventListener("mousemove", (event)=>{
 canvas.addEventListener("mouseleave", ()=>{mDown = 0;});
 canvas.addEventListener("mousedown", ()=>{mDown = 1;});
 canvas.addEventListener("mouseup", ()=>{mDown = 0;});
+
+//NavBar Event Listener
+navBar.addEventListener("click", (event)=>NavBar.handleInput(event,board));

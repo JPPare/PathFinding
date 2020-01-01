@@ -6,6 +6,9 @@ export default class Board{
         this.gridSize = grid_Size;
         this.startPos = [null, null, false]; //x, y, isSet
         this.endPos = [null, null, false];
+        this.rows = Math.floor(this.height/this.gridSize);
+        this.cols = Math.floor(this.width/this.gridSize);
+        this.grid = new Array(this.rows).fill(1).map(() => new Array(this.cols).fill(1));
 
         this.canvas = aCanvas;
         this.ctx = this.canvas.getContext("2d");
@@ -24,15 +27,20 @@ export default class Board{
         this.endPos = [x,y,true];
     }
 
-    drawBoard() {
+    drawInitBoard() {
+        for(let x of this.grid){x.fill(0);} //Reset the grid to all zeros
+        console.log(this.grid);
+        this.ctx.clearRect(0,0, this.width, this.height);
+        this.ctx.fillStyle = "grey";
+        this.ctx.fillRect(0,0, this.width, this.height);
         //Horizontal lines
-        for (let x = this.gridSize; x < this.width; x += this.gridSize) {
+        for (let x = 0; x <= this.width; x += this.gridSize) {
             this.ctx.moveTo(x, 0);
             this.ctx.lineTo(x, this.height);
             this.ctx.stroke();
         }
         //Vertical lines
-        for (let y = this.gridSize; y < this.height; y += this.gridSize) {
+        for (let y = 0; y <= this.height; y += this.gridSize) {
             this.ctx.moveTo(0, y);
             this.ctx.lineTo(this.width, y);
             this.ctx.stroke();
@@ -50,7 +58,7 @@ export default class Board{
         yPos -= 0;//r.left;
         if(xPos < 0 || yPos < 0 || xPos > this.width || yPos > this.height){console.log("Out of bounds");}
         else{
-            console.log("Highlighting ", xPos-r.top, yPos-r.left);
+            //console.log("Highlighting ", xPos-r.top, yPos-r.left);
             this.ctx.fillStyle = cellColor;
 
             let x = Math.floor(xPos/this.gridSize)*this.gridSize;
