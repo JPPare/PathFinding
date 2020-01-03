@@ -9,13 +9,13 @@ export default class Board{
         this.currPos = [null, null];
         this.rows = Math.floor(this.height/this.gridSize);
         this.cols = Math.floor(this.width/this.gridSize);
-        //Prefill the grid, using 1s just to test clear later.
+        //Prefill the grid with open spaces
         this.grid = new Array(this.rows).fill(1).map(() => new Array(this.cols).fill(1));
         this.gridKey = {
-            OPENSPACE:0,
-            WALL: 1,
-            START:2,
-            END:3
+            OPENSPACE: 1,
+            WALL: 0,
+            START: 2,
+            END: 3
         };
         this.canvas = aCanvas;
         this.ctx = this.canvas.getContext("2d");
@@ -73,7 +73,7 @@ export default class Board{
 
     drawStart(xPos,yPos){
         if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
-        else{
+        else if(this.grid[xPos][yPos]===this.gridKey.OPENSPACE){
             this.grid[xPos][yPos] = this.gridKey.START;
             this.startPos = [xPos,yPos];
             this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#66ff00');
@@ -81,7 +81,7 @@ export default class Board{
     }
     drawEnd(xPos,yPos){
         if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
-        else{
+        else if(this.grid[xPos][yPos]===this.gridKey.OPENSPACE){
             this.grid[xPos][yPos] = this.gridKey.END;
             this.endPos = [xPos,yPos];
             this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#6600ff');
