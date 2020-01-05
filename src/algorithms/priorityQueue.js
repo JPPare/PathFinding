@@ -26,12 +26,18 @@ class PriorityQueue{
 
             let val = this.heap[1];
             this.heap[1] = this.heap.pop();
-            if(this.heap.length === 2){return val;} //case were there was only 2 elements
+            if(this.heap.length === 2){return val;} //case where there was only 2 elements
 
             let currNode = 1;
             let leftChild = currNode * 2;
             let rightChild = currNode * 2 + 1;
 
+            if(this.heap.length === 3){             //case where there was 3 elements
+                if(this.comparator(this.heap[leftChild], this.heap[currNode]) ){
+                    [this.heap[leftChild], this.heap[currNode]] = [this.heap[currNode], this.heap[leftChild]];
+                }
+                return val;
+            }
 
             while(this.comparator(this.heap[leftChild], this.heap[currNode]) || this.comparator(this.heap[rightChild],this.heap[currNode])){
                 if(this.heap[rightChild]===undefined || this.comparator(this.heap[leftChild], this.heap[rightChild]) ){
@@ -52,15 +58,5 @@ class PriorityQueue{
     }
 }//End PriorityQueue
 
-let a = new PriorityQueue(((a,b)=>{return a.val < b.val;}));
-a.insert({val:6});
-a.insert({val:3});
-a.insert({val:1});
-
-console.log(a.heap);
-while(!a.isEmpty()){
-    console.log(a.remove());
-    //console.log(a.heap);
-}
 
 
