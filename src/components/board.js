@@ -4,16 +4,16 @@ export default class Board{
         this.width = areaWidth;
         this.height = areaHeight;
         this.gridSize = grid_Size;
-        this.startPos = [null, null]; //x, y
+        this.startPos = [null, null];
         this.endPos = [null, null];
         this.currPos = [null, null];
         this.rows = Math.floor(this.height/this.gridSize);
         this.cols = Math.floor(this.width/this.gridSize);
         //Prefill the grid with open spaces
-        this.grid = new Array(this.rows).fill(1).map(() => new Array(this.cols).fill(1));
+        this.grid = new Array(this.rows).fill(null).map(() => new Array(this.cols).fill(1));
         this.gridKey = {
-            OPENSPACE: 1,
             WALL: 0,
+            OPENSPACE: 1,
             START: 2,
             END: 3
         };
@@ -24,14 +24,20 @@ export default class Board{
     isStartSet(){
         return (this.startPos[0]!==null);
     }
-    setStartPos(x,y){
-        this.startPos = [x,y];
+    setStartPos(row,col){
+        this.startPos = [row,col];
     }
     isEndSet(){
         return (this.endPos[0]!==null);
     }
-    setEndPos(x,y){
-        this.endPos = [x,y];
+    setEndPos(row,col){
+        this.endPos = [row,col];
+    }
+    isSpaceOpen(row,col){
+        return (this.grid[row][col] === this.gridKey.OPENSPACE);
+    }
+    inBounds(row,col){
+        return !(row < 0 || col < 0 || row > this.rows || col > this.cols);
     }
 
     drawInitBoard() {
@@ -58,7 +64,7 @@ export default class Board{
 
     //Takes x,y as array grid position
     drawWall(xPos,yPos){
-        if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
+        if(!this.inBounds(xPos,yPos)){ console.log("out of bounds");}
         else if(xPos !== this.currPos[0] || yPos !== this.currPos[1]){
             this.currPos = [xPos,yPos];
             if(this.grid[xPos][yPos] === this.gridKey.OPENSPACE){
@@ -72,7 +78,7 @@ export default class Board{
     }
 
     drawStart(xPos,yPos){
-        if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
+        if(!this.inBounds(xPos,yPos)){ console.log("out of bounds");}
         else if(this.grid[xPos][yPos]===this.gridKey.OPENSPACE){
             this.grid[xPos][yPos] = this.gridKey.START;
             this.startPos = [xPos,yPos];
@@ -80,7 +86,7 @@ export default class Board{
         }
     }
     drawEnd(xPos,yPos){
-        if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
+        if(!this.inBounds(xPos,yPos)){ console.log("out of bounds");}
         else if(this.grid[xPos][yPos]===this.gridKey.OPENSPACE){
             this.grid[xPos][yPos] = this.gridKey.END;
             this.endPos = [xPos,yPos];
@@ -89,7 +95,7 @@ export default class Board{
     }
 
     clearCell(xPos,yPos){
-        if(xPos <0 || yPos < 0 || xPos > this.rows || yPos > this.cols){ console.log("out of bounds");}
+        if(!this.inBounds(xPos,yPos)){ console.log("out of bounds");}
         else{
             this.grid[xPos][yPos] = this.gridKey.OPENSPACE;
             this.highlightCell(xPos*this.gridSize, yPos*this.gridSize, "grey");
@@ -98,7 +104,7 @@ export default class Board{
 
     highlightCell(xPos,yPos, cellColor,){
         //Get the canvas boarder so mouse click coords will be relative
-        if(xPos < 0 || yPos < 0 || xPos > this.width || yPos > this.height){console.log("Out of bounds");}
+        if(xPos < 0 || yPos < 0 || xPos > this.width || yPos > this.height){console.log("Out of bounds",xPos,yPos);}
         else{
             this.ctx.fillStyle = cellColor;
             //Round input coords down to nearest cell
