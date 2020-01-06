@@ -13,6 +13,7 @@ export default class DSP{
             col: this.board.startPos[1],
             dist: 0
         };
+        this.grid[this.start.row][this.start.col] = 0;
         this.end = {
             row: this.board.endPos[0],
             col: this.board.endPos[1],
@@ -78,15 +79,16 @@ export default class DSP{
     searchGrid(){
         if(this.start === null || this.end === null){console.log("No start or end"); return;}
         this.pQue.insert(this.start);
-       //for(let x = 0; x < 200; x++){
-       while(!this.pQue.isEmpty() || !this.pQue.peak() === undefined){
+        while(!this.pQue.isEmpty() || !this.pQue.peak() === undefined){
             let currNode = this.pQue.remove();
+            this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#00ccff');
             if (currNode.row === this.end.row && currNode.col ===this.end.col){
-                this.end.dist = currNode.dist;
+                this.end.dist = currNode.dist+1;
                 this.extractPath();
                 break;
             }//change to extract path when its done
-           setTimeout(()=> this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#00ccff'), 0);
+
+           //setTimeout(()=> this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#00ccff'), 0);
            let neighbors = this.getNeighbors(currNode);
            this.processNeighbors(neighbors,currNode);
         }
@@ -112,10 +114,8 @@ export default class DSP{
             this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#119900');
             //setTimeout(()=> this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#119900'), 1000);
             path.push(currNode);
-           if(x > 100){break;} else {x++;}
 
         }
-        console.log(path);
         //get neighbors
         //find min dist
         //add min dist to path
