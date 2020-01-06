@@ -27,7 +27,7 @@ export default class NavBar{
     }
     static runBtn(board){
        let path = new DSP(board);
-       path.searchGrid();
+       path.rSearchGrid();
        console.log("Done");
     }
 }
