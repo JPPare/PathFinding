@@ -1,6 +1,8 @@
 
 import Board from "./components/board";
 import NavBar from "./components/navBar";
+import DSP from "./algorithms/dijsktra";
+
 //Get gameScreen area and get height and width from it
 let canvas = document.getElementById("gameScreen");
 let height = parseInt(canvas.getAttribute('height'));

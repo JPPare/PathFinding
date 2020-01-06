@@ -1,9 +1,8 @@
-class PriorityQueue{
+export default class PriorityQueue{
     constructor(comparator = (a,b)=>{return a < b;}){
         this.heap = [null];
         this.comparator = comparator;
     }
-
     isEmpty(){
         return this.heap.length <= 1;
     }
@@ -55,6 +54,9 @@ class PriorityQueue{
             }
             return val;
         }
+    }
+    peak(){
+        return this.heap[1];
     }
 }//End PriorityQueue
 

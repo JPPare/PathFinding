@@ -1,4 +1,5 @@
 import board from "./board";
+import DSP from "../algorithms/dijsktra";
 export default class NavBar{
     static handleInput(event,board){
        let btn = event.target.id;
@@ -6,6 +7,7 @@ export default class NavBar{
        else if(btn === "clearAllBtn"){NavBar.clearAll(board);}
        else if(btn === "setStartBtn"){NavBar.setStart(board);}
        else if(btn === "setEndBtn"){NavBar.setEnd(board);}
+       else if(btn === "runBtn"){NavBar.runBtn(board);}
        else{console.log(event.target);}
     }
     static clearAll(board){
@@ -22,5 +24,10 @@ export default class NavBar{
         const y = board.endPos[1];
         board.clearCell(x,y);
         board.endPos = [null,null];
+    }
+    static runBtn(board){
+       let path = new DSP(board);
+       path.searchGrid();
+       console.log("Done");
     }
 }

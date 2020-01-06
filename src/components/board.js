@@ -37,7 +37,7 @@ export default class Board{
         return (this.grid[row][col] === this.gridKey.OPENSPACE);
     }
     inBounds(row,col){
-        return !(row < 0 || col < 0 || row > this.rows || col > this.cols);
+        return !(row < 0 || col < 0 || row >= this.rows || col >= this.cols);
     }
 
     drawInitBoard() {
