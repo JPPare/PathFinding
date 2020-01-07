@@ -103,7 +103,7 @@ export default class DSP{
                 this.extractPath();
             }
             else {
-                this.board.highlightCell(currNode.row * this.board.gridSize, currNode.col * this.board.gridSize, '#00ccff');
+                if(currNode.dist !== 0) {this.board.highlightCell(currNode.row * this.board.gridSize, currNode.col * this.board.gridSize, '#00ccff');}
                 let neighbors = this.getNeighbors(currNode);
                 this.processNeighbors(neighbors, currNode);
                 window.requestAnimationFrame(()=>this.rSearchGrid());
@@ -147,7 +147,9 @@ export default class DSP{
                     };
                 }
             }
-            this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#119900');
+            if(currNode.dist !== 0) {
+                this.board.highlightCell(currNode.row * this.board.gridSize, currNode.col * this.board.gridSize, '#119900');
+            }
             path.push(currNode);
             window.requestAnimationFrame(()=>this.extractPath(path));
         }
