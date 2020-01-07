@@ -86,10 +86,17 @@ export default class Board{
             }
         }
     }
+    fillWalls(){
+        for(let row = 0; row < this.rows; row++){
+            for(let col = 0; col < this.cols; col++){
+                this.drawWall(row,col);
+            }
+        }
+    }
 
     drawStart(xPos,yPos){
         if(!this.inBounds(xPos,yPos)){ console.log("out of bounds");}
-        else if(this.grid[xPos][yPos]===this.gridKey.OPENSPACE){
+        else if(this.grid[xPos][yPos]!==this.gridKey.END){
             this.grid[xPos][yPos] = this.gridKey.START;
             this.startPos = [xPos,yPos];
             this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#66ff00');
@@ -97,7 +104,7 @@ export default class Board{
     }
     drawEnd(xPos,yPos){
         if(!this.inBounds(xPos,yPos)){ console.log("out of bounds");}
-        else if(this.grid[xPos][yPos]===this.gridKey.OPENSPACE){
+        else if(this.grid[xPos][yPos]!==this.gridKey.START){
             this.grid[xPos][yPos] = this.gridKey.END;
             this.endPos = [xPos,yPos];
             this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#6600ff');
