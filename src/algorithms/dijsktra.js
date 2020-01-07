@@ -73,30 +73,7 @@ export default class DSP{
         }
     }
 
-
-    // searchGrid(){
-    //     if(this.start === null || this.end === null){console.log("No start or end"); return;}
-    //     this.pQue.insert(this.start);
-    //     while(!this.pQue.isEmpty() || !this.pQue.peak() === undefined){
-    //         let currNode = this.pQue.remove();
-    //        // this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#00ccff');
-    //         if (currNode.row === this.end.row && currNode.col ===this.end.col){
-    //             this.end.dist = currNode.dist+1;
-    //             this.extractPath();
-    //             break;
-    //         }//change to extract path when its done
-    //
-    //        setTimeout(()=> this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#00ccff'), 0);
-    //        let neighbors = this.getNeighbors(currNode);
-    //        this.processNeighbors(neighbors,currNode);
-    //     }
-    // }
-
     rSearchGrid(){
-        // if(this.pQue.isEmpty()){
-        //     if(this.start === null || this.end === null){console.log("No start or end"); return;}
-        //     this.pQue.insert(this.start);
-        // }
         if(!this.pQue.isEmpty() || !this.pQue.peak() === undefined){
             let currNode = this.pQue.remove();
             if (currNode.row === this.end.row && currNode.col ===this.end.col){
@@ -111,26 +88,6 @@ export default class DSP{
             }
         }
     }
-    // extractPath(){
-    //     let path = [];
-    //     path.push(this.end);
-    //     let currNode = this.end;
-    //     while(currNode.dist!== 0){
-    //         let nodes = this.getNeighbors(currNode);
-    //         for (let node of nodes){
-    //             if(currNode.dist > this.grid[node[0]][node[1]] && this.grid[node[0]][node[1]] !== null){
-    //                 currNode = {
-    //                     row: node[0],
-    //                     col: node[1],
-    //                     dist: this.grid[node[0]][node[1]]
-    //                 };
-    //             }
-    //         }
-    //         this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#119900');
-    //         //setTimeout(()=> this.board.highlightCell(currNode.row*this.board.gridSize, currNode.col*this.board.gridSize, '#119900'), 1000);
-    //         path.push(currNode);
-    //     }
-    // }
 
     extractPath(path = []){
         if(path.length === 0 ){
