@@ -18,7 +18,7 @@
                     <li class="nav-item"><button id = clearEndBtn>Clear End</button></li>
                     <li class="nav-item"><button id = clearAllBtn>Clear All</button></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">WIP - Select Pathing Algorithm</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Algorithm</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <!--   <a class="dropdown-item" href="#" id = aStar >A*</a>
                                 <a class="dropdown-item" href="#" id = ret>Random Exploring Tree</a>
@@ -33,8 +33,9 @@
         <canvas id = gameScreen width="610" height = "610"></canvas>
     </div>
     <div class = "container1">
-        First click will place start point, second click will place end point, walls will be added after. Clicking on a wall will remove it. To change start or end points
-        use buttons in settings bar.
+        The first mouse click on the grid with place a green start cell. The second click will place a purple goal cell.
+        After these cells are placed you can use the buttons on the settings bar to clear them, the next click will place them again. Clicking and dragging will allow you to create walls. <br><br>
+        The drop down will let you run 2 algorithms right now. Dijkstra will find the shortest path between two points and Depth First Search Maze will create a maze.
     </div>
     <script src="main.js"></script>
 

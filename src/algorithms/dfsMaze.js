@@ -19,7 +19,8 @@ export default class dfsMaze{
         let col = Math.floor((Math.random()*(this.board.cols-1)));
         if(col % 2 ===0){col += (col > (this.board.cols/2)) ? -1 : 1}
         this.start = [row,col];
-        this.board.highlightCell(this.start[0] * this.board.gridSize, this.start[1] * this.board.gridSize, '#00ccff');
+        //this.board.highlightCell(this.start[0] * this.board.gridSize, this.start[1] * this.board.gridSize, '#00ccff');
+        this.board.clearCell(row,col);
         this.stack.push(this.start);
         this.genMaze(1);
     }
