@@ -19,6 +19,7 @@ export default class DSP{
             dist: null
         };
         this.searchMode = searchMode;
+        this.pQue.insert(this.start);
     }
 
     //Helpers
@@ -92,10 +93,10 @@ export default class DSP{
     // }
 
     rSearchGrid(){
-        if(this.pQue.isEmpty()){
-            if(this.start === null || this.end === null){console.log("No start or end"); return;}
-            this.pQue.insert(this.start);
-        }
+        // if(this.pQue.isEmpty()){
+        //     if(this.start === null || this.end === null){console.log("No start or end"); return;}
+        //     this.pQue.insert(this.start);
+        // }
         if(!this.pQue.isEmpty() || !this.pQue.peak() === undefined){
             let currNode = this.pQue.remove();
             if (currNode.row === this.end.row && currNode.col ===this.end.col){
