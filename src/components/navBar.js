@@ -3,14 +3,17 @@ import DSP from "../algorithms/dijsktra";
 export default class NavBar{
     static handleInput(event,board){
        let btn = event.target.id;
-       if(btn === "aStar"){console.log("Selected: ", event.target.text);}
+       //if(btn === "navbarDropdown"){console.log("Selected: ", event.target.text = "test");}
+       if(btn === "dijkstra"){document.getElementById("navbarDropdown").text = event.target.text;}
+       else if(btn === "dfsMaze"){document.getElementById("navbarDropdown").text = event.target.text;}
        else if(btn === "clearAllBtn"){NavBar.clearAll(board);}
        else if(btn === "clearStartBtn"){NavBar.clearStart(board);}
        else if(btn === "clearEndBtn"){NavBar.clearEnd(board);}
        else if(btn === "runBtn"){NavBar.runBtn(board);}
-       else{console.log(event.target);}
+       else{console.log(event.target.id);}
     }
     static clearAll(board){
+        document.getElementById("navbarDropdown").text = "Select Algorithm";
         board.drawInitBoard();
     }
     static clearStart(board){
@@ -30,11 +33,17 @@ export default class NavBar{
         }
     }
     static runBtn(board){
-        if(board.isStartSet() && board.isEndSet()) {
-            board.refreshBoard();
-            let path = new DSP(board);
-            path.rSearchGrid();
-            console.log("Done");
+        let toRun = document.getElementById("navbarDropdown").text;
+        if(toRun === document.getElementById("dijkstra").text) {
+            if (board.isStartSet() && board.isEndSet()) {
+                board.refreshBoard();
+                let path = new DSP(board);
+                path.rSearchGrid();
+                console.log("Done");
+            }
+        }
+        else if(toRun === document.getElementById("dfsMaze").text){
+            console.log("Run Maze")
         }
     }
 }
