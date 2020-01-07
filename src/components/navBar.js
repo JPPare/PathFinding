@@ -1,16 +1,15 @@
 import board from "./board";
 import DSP from "../algorithms/dijsktra";
+import dfsMaze from "../algorithms/dfsMaze";
 export default class NavBar{
     static handleInput(event,board){
        let btn = event.target.id;
-       //if(btn === "navbarDropdown"){console.log("Selected: ", event.target.text = "test");}
        if(btn === "dijkstra"){document.getElementById("navbarDropdown").text = event.target.text;}
        else if(btn === "dfsMaze"){document.getElementById("navbarDropdown").text = event.target.text;}
        else if(btn === "clearAllBtn"){NavBar.clearAll(board);}
        else if(btn === "clearStartBtn"){NavBar.clearStart(board);}
        else if(btn === "clearEndBtn"){NavBar.clearEnd(board);}
        else if(btn === "runBtn"){NavBar.runBtn(board);}
-       else{console.log(event.target.id);}
     }
     static clearAll(board){
         document.getElementById("navbarDropdown").text = "Select Algorithm";
@@ -43,7 +42,10 @@ export default class NavBar{
             }
         }
         else if(toRun === document.getElementById("dfsMaze").text){
-            console.log("Run Maze")
+            board.drawInitBoard();
+            let maze = new dfsMaze(board);
+            maze.createMaze();
+            console.log("Done");
         }
     }
 }
