@@ -96,7 +96,6 @@ export default class dfsMaze{
             window.requestAnimationFrame(()=>this.genMaze(x+1));
         }
     }
-
     //Random start point & mark as open
     //pick random direction
     //Check 2 squares in that direction
