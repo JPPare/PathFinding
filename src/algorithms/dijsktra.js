@@ -1,6 +1,5 @@
 import PriorityQueue from "./priorityQueue";
 
-
 export default class DSP{
     constructor(board, searchMode = 2){
         //grid to hold distance from start to each node
@@ -20,7 +19,6 @@ export default class DSP{
             dist: null
         };
         this.searchMode = searchMode;
-
     }
 
     //Helpers

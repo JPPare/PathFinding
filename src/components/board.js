@@ -62,6 +62,16 @@ export default class Board{
         }
     } //End drawBoard
 
+    refreshBoard(){
+        for (let row = 0; row <= this.rows-1; row++){
+            for (let col = 0; col <= this.cols-1; col++){
+                if(this.grid[row][col] === 1){
+                    this.clearCell(row,col);
+                }
+            }
+        }
+    }
+
     //Takes x,y as array grid position
     drawWall(xPos,yPos){
         if(!this.inBounds(xPos,yPos)){ console.log("out of bounds");}
