@@ -87,6 +87,8 @@ export default class Board{
         }
     }
     fillWalls(){
+        this.start = [null,null];
+        this.end = [null,null];
         for(let row = 0; row < this.rows; row++){
             for(let col = 0; col < this.cols; col++){
                 this.drawWall(row,col);
