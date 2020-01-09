@@ -4,15 +4,17 @@ import dfsMaze from "../algorithms/dfsMaze";
 export default class NavBar{
     static handleInput(event,board){
        let btn = event.target.id;
-       if(btn === "dijkstra"){document.getElementById("navbarDropdown").text = event.target.text;}
-       else if(btn === "dfsMaze"){document.getElementById("navbarDropdown").text = event.target.text;}
+       if(btn === "dijkstra"){document.getElementById("infoBar").innerHTML =  event.target.text;}
+       else if(btn === "dfsMaze"){document.getElementById("infoBar").innerHTML = event.target.text;}
        else if(btn === "clearAllBtn"){NavBar.clearAll(board);}
        else if(btn === "clearStartBtn"){NavBar.clearStart(board);}
        else if(btn === "clearEndBtn"){NavBar.clearEnd(board);}
        else if(btn === "runBtn"){NavBar.runBtn(board);}
     }
     static clearAll(board){
-        document.getElementById("navbarDropdown").text = "Select Algorithm";
+        console.log("clear");
+        console.log(document.getElementById("infoBar"));
+        document.getElementById("infoBar").innerHTML = "Please select an algorithm from the drop down above.";
         board.drawInitBoard();
     }
     static clearStart(board){
@@ -32,7 +34,7 @@ export default class NavBar{
         }
     }
     static runBtn(board){
-        let toRun = document.getElementById("navbarDropdown").text;
+        let toRun = document.getElementById("infoBar").innerHTML;
         if(toRun === document.getElementById("dijkstra").text) {
             if (board.isStartSet() && board.isEndSet()) {
                 board.refreshBoard();

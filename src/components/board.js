@@ -109,7 +109,7 @@ export default class Board{
         else if(this.grid[xPos][yPos]!==this.gridKey.START){
             this.grid[xPos][yPos] = this.gridKey.END;
             this.endPos = [xPos,yPos];
-            this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#6600ff');
+            this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#1111ff');
         }
     }
 
