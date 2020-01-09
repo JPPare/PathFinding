@@ -1,11 +1,14 @@
 import board from "./board";
 import DSP from "../algorithms/dijsktra";
+import DFS from "../algorithms/dsfSearch";
+
 import dfsMaze from "../algorithms/dfsMaze";
 export default class NavBar{
     static handleInput(event,board){
        let btn = event.target.id;
        if(btn === "dijkstra"){document.getElementById("infoBar").innerHTML =  event.target.text;}
        else if(btn === "dfsMaze"){document.getElementById("infoBar").innerHTML = event.target.text;}
+       else if(btn === "dfsSearch"){document.getElementById("infoBar").innerHTML = event.target.text;}
        else if(btn === "clearAllBtn"){NavBar.clearAll(board);}
        else if(btn === "clearStartBtn"){NavBar.clearStart(board);}
        else if(btn === "clearEndBtn"){NavBar.clearEnd(board);}
@@ -35,10 +38,13 @@ export default class NavBar{
     }
     static runBtn(board){
         let toRun = document.getElementById("infoBar").innerHTML;
-        if(toRun === document.getElementById("dijkstra").text) {
+        console.log(toRun);
+        if(toRun === document.getElementById("dijkstra").text || toRun === document.getElementById("dfsSearch").text) {
             if (board.isStartSet() && board.isEndSet()) {
                 board.refreshBoard();
-                let path = new DSP(board);
+                let path = null;
+                if (toRun === document.getElementById("dijkstra").text){path = new DSP(board);}
+                else {path = new DFS(board);}
                 path.rSearchGrid();
                 console.log("Done");
             }

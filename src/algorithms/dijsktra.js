@@ -70,6 +70,7 @@ export default class DSP{
             i.dist = aNode.dist + 1;
             this.grid[i.row][i.col] =i.dist;
             this.pQue.insert(i);
+            this.board.highlightCell(i.row * this.board.gridSize, i.col * this.board.gridSize, '#ff0000');
         }
     }
 

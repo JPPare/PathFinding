@@ -58,6 +58,9 @@ export default class PriorityQueue{
     peak(){
         return this.heap[1];
     }
+    clearAll(){
+        this.heap = [null];
+    }
 }//End PriorityQueue
 
 

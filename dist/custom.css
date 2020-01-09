@@ -83,6 +83,7 @@
 
 .dropdown-content {
     display:none;
+    width: 200px;
     position: absolute;
     z-index: 1;
     box-shadow:inset 0px 1px 0px 0px #bee2f9;
@@ -148,10 +149,13 @@
     z-index: 5;
 
 }
-
+.tooltip li{
+    text-align: left;
+    margin-top: 10px;
+}
 .tooltip .right {
     border: 3px solid white;
-    min-width:450px;
+    min-width:500px;
     top:100%;
     left:100%;
     margin-left:20px;
