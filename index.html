@@ -11,7 +11,10 @@
     <div class="dropdown-menu" id = "algorithm-dropdown">
         <button class = fancyButton id = dropDown>DropDown</button>
         <div class="dropdown-content">
+            <h3>Path Finding</h3>
             <a class="dropdown-item" href="#" id = dijkstra>Dijkstra</a>
+            <a class="dropdown-item" href="#" id = dfsSearch>Depth First Search</a>
+            <h3>Mazes</h3>
             <a class="dropdown-item" href="#" id = dfsMaze>Depth First Search Maze</a>
         </div>
     </div>
@@ -47,8 +50,8 @@
             <li>The first mouse-click on the grid with place a green start cell. The second click will place a dark blue goal cell.</li>
             <li>After these cells are placed you can use the buttons on the settings bar to clear them, the next click will place them again.</li>
             <li>Clicking and dragging will allow you to create walls or remove them.</li>
-            <li>The drop down will let you run 2 algorithms right now. Dijkstra will find the shortest path between two points and Depth First Search Maze will create a maze.</li>
-            <li>You can run the maze algorithm to generate a good test for the Dijkstra algorithm.</li>
+            <li>During the search blues cells indicate nodes the algorithm has visited. A red cell indicates a node that has been seen and will be returned to later. </li>
+            <li>You can run the maze algorithm to generate a good test for the path finding algorithms.</li>
             </p>
             <i></i>
 
