@@ -42,12 +42,17 @@ export default class NavBar{
                 path.rSearchGrid();
                 console.log("Done");
             }
+            else{
+                window.alert("Either the start or end cell is not marked.");
+            }
         }
         else if(toRun === document.getElementById("dfsMaze").text){
             board.drawInitBoard();
             let maze = new dfsMaze(board);
             maze.createMaze();
             console.log("Done");
+        }else{
+            window.alert("Please select an algorithm from the drop down.");
         }
     }
 }

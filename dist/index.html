@@ -22,25 +22,38 @@
         <button class = fancyButton  id = clearEndBtn>Clear End</button>
         <button class = fancyButton  id = clearAllBtn>Clear All</button>
         <button class = fancyButton  id = runBtn>Run</button>
-        <button class= "fancyButton tooltip">Info
-              <div class="right">
-                <h1>About</h1>
-                <p>
-                  <li>The first mouse-click on the grid with place a green start cell. The second click will place a dark blue goal cell.</li>
-                  <li>After these cells are placed you can use the buttons on the settings bar to clear them, the next click will place them again.</li>
-                  <li>Clicking and dragging will allow you to create walls or remove them.</li>
-                  <li>The drop down will let you run 2 algorithms right now. Dijkstra will find the shortest path between two points and Depth First Search Maze will create a maze.</li>
-                  <li>You can run the maze algorithm to generate a good test for the Dijkstra algorithm.</li>
-                </p>
-                <i></i>
-            </div>
-        </button>
     </div>
+
     <canvas id = gameScreen width="610" height = "610"></canvas>
+
     <h1 id = infoBar>Please select an algorithm from the drop down above.</h1>
+
     <div class = flag id = red-flag draggable = true></div>
     <div class = flag id = green-flag></div>
 
+    <div class="scene  tooltip">
+        <div class="cube">
+            <div class="cube__face cube__face--front">Info</div>
+            <div class="cube__face cube__face--back">Info</div>
+            <div class="cube__face cube__face--right">Info</div>
+            <div class="cube__face cube__face--left">Info</div>
+            <div class="cube__face cube__face--top">Info</div>
+            <div class="cube__face cube__face--bottom">Info</div>
+        </div>
+
+        <div class="right">
+            <h1>About</h1>
+            <p>
+            <li>The first mouse-click on the grid with place a green start cell. The second click will place a dark blue goal cell.</li>
+            <li>After these cells are placed you can use the buttons on the settings bar to clear them, the next click will place them again.</li>
+            <li>Clicking and dragging will allow you to create walls or remove them.</li>
+            <li>The drop down will let you run 2 algorithms right now. Dijkstra will find the shortest path between two points and Depth First Search Maze will create a maze.</li>
+            <li>You can run the maze algorithm to generate a good test for the Dijkstra algorithm.</li>
+            </p>
+            <i></i>
+
+        </div>
+    </div>
 
     <script src="main.js"></script>
 </div>

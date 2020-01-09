@@ -1,5 +1,8 @@
 :root{
+    --cubeSize: 100px;
+    --faceTranslate: 50px;
     --borderColor: lightblue;
+    --cubeFaceColor: radial-gradient(circle, rgba(70,252,115,0.70) 0%, rgba(63,94,251,1) 100%);;
       background: rgb(53,0,167);
       background: radial-gradient(circle, rgba(53,0,167,1) 0%, rgba(11,242,240,1) 100%, rgba(9,255,0,1) 100%);
 }
@@ -25,12 +28,12 @@
 #navBar{
     margin: 10px;
     border: 10px solid var(--borderColor);
-    width: 75px;
+    width: 95px;
     position: absolute;
     top: 25px;
     left: -1px;
     background: darkgrey;
-    font-size:23px;
+    font-size:20px;
 
 }
 #infoText{
@@ -39,6 +42,7 @@
     bottom: 10px;
 }
 
+/*Buttons*/
 .fancyButton {
     box-shadow:inset 0px 1px 0px 0px #bee2f9;
     background:linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
@@ -63,7 +67,6 @@
     position:relative;
     top:2px;
 }
-
 
 /*DropDown Menu Section*/
 .dropdown-menu{
@@ -138,9 +141,11 @@
     text-align: center;
 }
 
+/*tooltips*/
 .tooltip {
     display:inline-block;
     text-align:center;
+    z-index: 5;
 
 }
 
@@ -150,7 +155,7 @@
     top:100%;
     left:100%;
     margin-left:20px;
-    transform:translate(0, -50%);
+    transform:translate(0, -55%);
     padding:10px 20px;
     color:#000000;
     /*background-color:#0099CC;*/
@@ -172,19 +177,19 @@
 
 .tooltip .right i {
     position:absolute;
-    top:50%;
+    top:45%;
     right:100%;
     margin-top:-12px;
-    width:12px;
-    height:24px;
+    width:24px;
+    height:36px;
     overflow:hidden;
 }
 
 .tooltip .right i::after {
     content:'';
     position:absolute;
-    width:12px;
-    height:12px;
+    width:24px;
+    height:24px;
     left:0;
     top:50%;
     transform:translate(50%,-50%) rotate(-45deg);
@@ -193,7 +198,7 @@
     border: 2px solid white;
 }
 
-
+/*flags*/
 .flag {
     display:none;
     content:'';
@@ -211,3 +216,61 @@
     top:50%;
     background-color:green;
 }
+
+/*cube*/
+* { box-sizing: border-box; }
+
+body { font-family: Calibri; }
+
+.scene {
+    width: var(--cubeSize);;
+    height: var(--cubeSize);;
+    margin: 0px;
+    perspective: var(--cubeSize);
+    position: absolute;
+    top: 250px;
+    left: 0px;
+}
+
+.cube {
+    width: var(--cubeSize);
+    height: var(--cubeSize);
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(-100px) ;
+   animation: spinCube 10s infinite;
+    animation-timing-function:linear;
+}
+
+@keyframes spinCube {
+    /*0% { transform: translateZ(-100px) rotateX(  40deg) rotateY(  45deg); }*/
+    /*100% { transform: translateZ(-100px) rotateX(40deg) rotateY(180deg); }*/
+    0%{transform: translateZ(-100px) rotate3d(0,0,0,0deg); }
+    100%{transform: translateZ(-100px) rotate3d(-1,.5,-1,360deg)}
+}
+
+.cube__face {
+    position: absolute;
+    width: var(--cubeSize);
+    height: var(--cubeSize);
+    border: 2px solid black;
+    line-height: var(--cubeSize);
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.cube__face--front  { background: var(--cubeFaceColor); }
+.cube__face--right  { background: var(--cubeFaceColor); }
+.cube__face--back   { background: var(--cubeFaceColor); }
+.cube__face--left   { background: var(--cubeFaceColor); }
+.cube__face--top    { background: var(--cubeFaceColor); }
+.cube__face--bottom { background: var(--cubeFaceColor); }
+
+.cube__face--front  { transform: rotateY(  0deg) translateZ(var(--faceTranslate)); }
+.cube__face--right  { transform: rotateY( 90deg) translateZ(var(--faceTranslate)); }
+.cube__face--back   { transform: rotateY(180deg) translateZ(var(--faceTranslate)); }
+.cube__face--left   { transform: rotateY(-90deg) translateZ(var(--faceTranslate)); }
+.cube__face--top    { transform: rotateX( 90deg) translateZ(var(--faceTranslate)); }
+.cube__face--bottom { transform: rotateX(-90deg) translateZ(var(--faceTranslate)); }
