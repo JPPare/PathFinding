@@ -16,11 +16,12 @@ export default class NavBar{
     }
     static clearAll(board){
         console.log("clear");
-        console.log(document.getElementById("infoBar"));
+        board.running = false;
         document.getElementById("infoBar").innerHTML = "Please select an algorithm from the drop down above.";
         board.drawInitBoard();
     }
     static clearStart(board){
+        board.running = false;
        if(board.isStartSet()) {
            const x = board.startPos[0];
            const y = board.startPos[1];
@@ -29,6 +30,7 @@ export default class NavBar{
        }
     }
     static clearEnd(board){
+        board.running = false;
         if(board.isEndSet()) {
             const x = board.endPos[0];
             const y = board.endPos[1];
@@ -38,9 +40,9 @@ export default class NavBar{
     }
     static runBtn(board){
         let toRun = document.getElementById("infoBar").innerHTML;
-        console.log(toRun);
         if(toRun === document.getElementById("dijkstra").text || toRun === document.getElementById("dfsSearch").text) {
             if (board.isStartSet() && board.isEndSet()) {
+                board.running = true;
                 board.refreshBoard();
                 let path = null;
                 if (toRun === document.getElementById("dijkstra").text){path = new DSP(board);}
@@ -53,6 +55,7 @@ export default class NavBar{
             }
         }
         else if(toRun === document.getElementById("dfsMaze").text){
+            board.running = true;
             board.drawInitBoard();
             let maze = new dfsMaze(board);
             maze.createMaze();

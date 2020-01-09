@@ -19,6 +19,7 @@ export default class Board{
         };
         this.canvas = aCanvas;
         this.ctx = this.canvas.getContext("2d");
+        this.running = false;
     }//End Constructor
 
     isStartSet(){

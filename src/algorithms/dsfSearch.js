@@ -4,13 +4,10 @@ import dijsktra from "./dijsktra";
 export default class DFS extends dijsktra {
 
     constructor(board, searchMode) {
-        console.log("test");
         super(board, searchMode);
-        console.log("test");
         this.pQue.comparator = (a, b) => {
             return a.dist > b.dist;
         };
-        console.log("test");
     }
 
 

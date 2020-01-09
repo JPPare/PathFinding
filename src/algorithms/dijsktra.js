@@ -70,11 +70,14 @@ export default class DSP{
             i.dist = aNode.dist + 1;
             this.grid[i.row][i.col] =i.dist;
             this.pQue.insert(i);
-            this.board.highlightCell(i.row * this.board.gridSize, i.col * this.board.gridSize, '#ff0000');
+            if(i.row !== this.end.row || i.col !== this.end.col) {
+                this.board.highlightCell(i.row * this.board.gridSize, i.col * this.board.gridSize, '#ff0000');
+            }
         }
     }
 
     rSearchGrid(){
+        if(this.board.running === false){return;}
         if(!this.pQue.isEmpty() || !this.pQue.peak() === undefined){
             let currNode = this.pQue.remove();
             if (currNode.row === this.end.row && currNode.col ===this.end.col){
@@ -91,6 +94,7 @@ export default class DSP{
     }
 
     extractPath(path = []){
+        if(this.board.running === false){return;}
         if(path.length === 0 ){
             path.push(this.end);
         }

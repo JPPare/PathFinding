@@ -82,6 +82,7 @@ export default class dfsMaze{
 
     genMaze(x){
         //if(x>50){return;}
+        if(this.board.running === false){return;}
         let currNode = this.stack[this.stack.length-1];
         let nextNodes = this.getDirections(currNode);
         if(nextNodes === null){
