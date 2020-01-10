@@ -1,6 +1,6 @@
 :root{
-    --cubeSize: 100px;
-    --faceTranslate: 50px;
+    --cubeSize: 150px;
+    --faceTranslate: 75px;
     --borderColor: lightblue;
     --cubeFaceColor: radial-gradient(circle, rgba(70,252,115,0.70) 0%, rgba(63,94,251,1) 100%);;
       background: rgb(53,0,167);
@@ -28,13 +28,17 @@
 #navBar{
     margin: 10px;
     border: 10px solid var(--borderColor);
-    width: 95px;
+    width: 175px;
     position: absolute;
     top: 25px;
-    left: -1px;
+    transform: translate(-50%,0);
     background: darkgrey;
     font-size:20px;
 
+}
+#navBar-hr{
+    border:10px solid var(--borderColor);
+    margin:0px;
 }
 #infoText{
     width: 700px;
@@ -57,7 +61,9 @@
     font-weight:bold;
     text-decoration:none;
     text-shadow:0px 1px 0px #7cacde;
-    width: 75px;
+    width: 100%;
+    padding: 10px;
+
 }
 .fancyButton:hover {
     background:linear-gradient(to bottom, #468ccf 5%, #63b8ee 100%);
@@ -70,21 +76,15 @@
 
 /*DropDown Menu Section*/
 .dropdown-menu{
-    position: absolute;
-    left: 50%;
-    top: 8px;
-    transform: translate(-50%,0);
-}
-#dropDown{
-    width: 100px;
-    height: 25px;
-    padding: 0 !important;
+    position: relative;
 }
 
 .dropdown-content {
     display:none;
     width: 200px;
+    left: 150px;
     position: absolute;
+    top: 0px;
     z-index: 1;
     box-shadow:inset 0px 2px 0px 0px #bee2f9;
     background:linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
@@ -116,13 +116,7 @@
     position:relative;
     top:2px;
 }
-.dropdown-content h3{
-    height:15px;
-    border: 5px;
-}
-.dropdown-content hr{
-    border: 1px solid black;
-}
+
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -161,7 +155,7 @@
 .tooltip .right {
     border: 3px solid white;
     min-width:500px;
-    top:100%;
+    top:50%;
     left:100%;
     margin-left:20px;
     transform:translate(0, -55%);
@@ -237,8 +231,8 @@ body { font-family: Calibri; }
     margin: 0px;
     perspective: var(--cubeSize);
     position: absolute;
-    top: 250px;
-    left: 0px;
+    top: 400px;
+    left: -75px;
 }
 
 .cube {
@@ -247,7 +241,7 @@ body { font-family: Calibri; }
     position: relative;
     transform-style: preserve-3d;
     transform: translateZ(-100px) ;
-   animation: spinCube 10s infinite;
+    animation: spinCube 10s infinite;
     animation-timing-function:linear;
 }
 
@@ -264,11 +258,12 @@ body { font-family: Calibri; }
     height: var(--cubeSize);
     border: 2px solid black;
     line-height: var(--cubeSize);
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     color: white;
     text-align: center;
 }
+
 
 .cube__face--front  { background: var(--cubeFaceColor); }
 .cube__face--right  { background: var(--cubeFaceColor); }

@@ -3,30 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Playing with JS</title>
-    <link rel="stylesheet" type="text/css" href='custom.css?version=4'>
+    <link rel="stylesheet" type="text/css" href='custom.css?version=5'>
 
 </head>
 <body>
 <div id = mainArea>
-    <div class="dropdown-menu" id = "algorithm-dropdown">
-        <button class = fancyButton id = dropDown>DropDown</button>
-        <div class="dropdown-content">
-            <h3>Path Finding</h3>
-            <a class="dropdown-item" href="#" id = dijkstra>Dijkstra</a>
-            <a class="dropdown-item" href="#" id = dfsSearch>Depth First Search</a>
-            <hr> </hr>
-            <h3>Mazes</h3>
-            <a class="dropdown-item" href="#" id = dfsMaze>Depth First Search Maze</a>
-        </div>
-    </div>
+<!--    <div class="dropdown-menu" id = "algorithm-dropdown">-->
+<!--        <button class = fancyButton id = dropDown>DropDown</button>-->
+<!--        <div class="dropdown-content">-->
+<!--            <h3>Path Finding</h3>-->
+<!--            <a class="dropdown-item" href="#" id = dijkstra>Dijkstra</a>-->
+<!--            <a class="dropdown-item" href="#" id = dfsSearch>Depth First Search</a>-->
+<!--            <hr> </hr>-->
+<!--            <h3>Mazes</h3>-->
+<!--            <a class="dropdown-item" href="#" id = dfsMaze>Depth First Search Maze</a>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div id="navBar">
-        <a class="navbar-title">Settings</a>
-        <button class = fancyButton  id = clearStartBtn>Clear Start</button>
-        <button class = fancyButton  id = clearEndBtn>Clear End</button>
-        <button class = fancyButton  id = clearAllBtn>Clear All</button>
-        <button class = fancyButton  id = runBtn>Run</button>
-    </div>
+        <button class = fancyButton  id = clearStartBtn>Clear Start Point</button>
+        <button class = fancyButton  id = clearEndBtn>Clear End Point</button>
+        <button class = fancyButton  id = clearAllBtn>Clear Grid</button>
+        <button class = fancyButton  id = refreshBtn>Clear Results</button>
+        <hr id = navBar-hr>
+        <div class="dropdown-menu" id = "algo-dropdown">
+            <button class = fancyButton  id = runAlgo>Run Search</button>
+            <div class="dropdown-content">
+                <a class="dropdown-item" href="#" id = algo-dijkstra>Dijkstra</a>
+                <a class="dropdown-item" href="#" id = algo-dfsSearch>Depth First Search</a>
+            </div>
+        </div>
+        <div class="dropdown-menu" id = "maze-dropdown">
+            <button class = fancyButton  id = genMaze>Generate a Maze</button>
+                  <div class="dropdown-content">
+                        <a class="dropdown-item" href="#" id = gen-dfsMaze>Depth First Search Maze</a>
+                    </div>
+                </div>
+        <button class = fancyButton id = stopBtn>Stop</button>
+         </div>
+
 
     <canvas id = gameScreen width="610" height = "610"></canvas>
 
@@ -37,22 +52,27 @@
 
     <div class="scene  tooltip">
         <div class="cube">
-            <div class="cube__face cube__face--front">Info</div>
-            <div class="cube__face cube__face--back">Info</div>
-            <div class="cube__face cube__face--right">Info</div>
-            <div class="cube__face cube__face--left">Info</div>
-            <div class="cube__face cube__face--top">Info</div>
-            <div class="cube__face cube__face--bottom">Info</div>
+            <div class="cube__face cube__face--front">Instructions</div>
+            <div class="cube__face cube__face--back">Instructions</div>
+            <div class="cube__face cube__face--right">Instructions</div>
+            <div class="cube__face cube__face--left">Instructions</div>
+            <div class="cube__face cube__face--top">Instructions</div>
+            <div class="cube__face cube__face--bottom">Instructions</div>
         </div>
 
         <div class="right">
-            <h1>About</h1>
             <p>
-            <li>The first mouse-click on the grid with place a green start cell. The second click will place a dark blue goal cell.</li>
-            <li>After these cells are placed you can use the buttons on the settings bar to clear them, the next click will place them again.</li>
+            <li>Click a cell to place the start, click again to place the goal.</li>
+            <li>Once start and goal nodes have been placed you can draw walls.</li>
             <li>Clicking and dragging will allow you to create walls or remove them.</li>
-            <li>During the search blues cells indicate nodes the algorithm has visited. A red cell indicates a node that has been seen and will be returned to later. </li>
-            <li>You can run the maze algorithm to generate a good test for the path finding algorithms.</li>
+            <br>Color Code<br>
+            <span style = "color:blue">&#9632 </span> Goal
+            <span style = "color:lawngreen">&#9632 </span> Start
+            <span style = "color:black">&#9632 </span> Wall
+            <span style = "color:dimgrey">&#9632 </span> Open Space <br>
+            <span style = "color:deepskyblue">&#9632 </span> Visited Node<br>
+            <span style = "color:red">&#9632 </span> Node queued to be visited.
+
             </p>
             <i></i>
 
