@@ -1,25 +1,30 @@
 import board from "./board";
 import DSP from "../algorithms/dijsktra";
 import DFS from "../algorithms/dsfSearch";
-
 import dfsMaze from "../algorithms/dfsMaze";
+
 export default class NavBar{
     static handleInput(event,board){
-       let btn = event.target.id;
-       if(btn === "dijkstra"){document.getElementById("infoBar").innerHTML =  event.target.text;}
-       else if(btn === "dfsMaze"){document.getElementById("infoBar").innerHTML = event.target.text;}
-       else if(btn === "dfsSearch"){document.getElementById("infoBar").innerHTML = event.target.text;}
-       else if(btn === "clearAllBtn"){NavBar.clearAll(board);}
-       else if(btn === "clearStartBtn"){NavBar.clearStart(board);}
-       else if(btn === "clearEndBtn"){NavBar.clearEnd(board);}
-       else if(btn === "runBtn"){NavBar.runBtn(board);}
+       let btn = event.target;
+       if(btn.id === "clearAllBtn"){NavBar.clearAll(board);}
+       else if(btn.id === "clearStartBtn"){NavBar.clearStart(board);}
+       else if(btn.id === "clearEndBtn"){NavBar.clearEnd(board);}
+       else if(btn.id === "stopBtn"){board.running = false;}
+       else if(btn.id === "refreshBtn"){
+           board.running = false;
+           board.refreshBoard();
+       }
+       else if((btn.id.slice(0,4)) === "algo"){NavBar.runAlgo(board, btn);}
+       else if((btn.id.slice(0,3)) === "gen"){NavBar.genMaze(board,btn);}
     }
+
     static clearAll(board){
         console.log("clear");
         board.running = false;
         document.getElementById("infoBar").innerHTML = "Please select an algorithm from the drop down above.";
         board.drawInitBoard();
     }
+
     static clearStart(board){
         board.running = false;
        if(board.isStartSet()) {
@@ -29,6 +34,7 @@ export default class NavBar{
            board.startPos = [null, null];
        }
     }
+
     static clearEnd(board){
         board.running = false;
         if(board.isEndSet()) {
@@ -38,28 +44,33 @@ export default class NavBar{
             board.endPos = [null, null];
         }
     }
-    static runBtn(board){
-        let toRun = document.getElementById("infoBar").innerHTML;
-        if(toRun === document.getElementById("dijkstra").text || toRun === document.getElementById("dfsSearch").text) {
-            if (board.isStartSet() && board.isEndSet()) {
-                board.running = true;
-                board.refreshBoard();
-                let path = null;
-                if (toRun === document.getElementById("dijkstra").text){path = new DSP(board);}
-                else {path = new DFS(board);}
-                path.rSearchGrid();
-                console.log("Done");
+
+    static runAlgo(board, btn) {
+        board.running = false;
+        if (board.isStartSet() && board.isEndSet()) {
+            board.running = true;
+            document.getElementById("infoBar").innerHTML = btn.text;
+            board.refreshBoard();
+            let path = null;
+            if (btn.id === "algo-dijkstra") {
+                path = new DSP(board);
+            } else {
+                path = new DFS(board);
             }
-            else{
-                window.alert("Either the start or end cell is not marked.");
-            }
+            path.rSearchGrid();
+        } else {
+            window.alert("Either the start or end cell is not marked.");
         }
-        else if(toRun === document.getElementById("dfsMaze").text){
+    }
+
+    static genMaze(board,btn){
+        board.running = false;
+        if(btn.id === "gen-dfsMaze"){
             board.running = true;
             board.drawInitBoard();
+            document.getElementById("infoBar").innerHTML = btn.text;
             let maze = new dfsMaze(board);
             maze.createMaze();
-            console.log("Done");
         }else{
             window.alert("Please select an algorithm from the drop down.");
         }

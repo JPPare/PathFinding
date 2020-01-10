@@ -8,7 +8,7 @@ let canvas = document.getElementById("gameScreen");
 let height = parseInt(canvas.getAttribute('height'));
 let width = parseInt(canvas.getAttribute('width'));
 let navBar = document.getElementById("navBar");
-let dropDown = document.getElementById("algorithm-dropdown");
+
 let border = (canvas.offsetHeight-height)/2;
 let mDown = 0;
 
@@ -38,5 +38,4 @@ canvas.addEventListener("mousedown", ()=>{mDown = 1;});
 canvas.addEventListener("mouseup", ()=>{mDown = 0;});
 
 //NavBar Event Listener
- navBar.addEventListener("click", (event)=>NavBar.handleInput(event,board));
- dropDown.addEventListener("click", (event)=>NavBar.handleInput(event,board));
+navBar.addEventListener("click", (event)=>NavBar.handleInput(event,board));

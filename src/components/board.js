@@ -102,15 +102,16 @@ export default class Board{
         else if(this.grid[xPos][yPos]!==this.gridKey.END){
             this.grid[xPos][yPos] = this.gridKey.START;
             this.startPos = [xPos,yPos];
-            this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#66ff00');
+            this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'lawngreen');
         }
     }
+
     drawEnd(xPos,yPos){
         if(!this.inBounds(xPos,yPos)){ console.log("out of bounds");}
         else if(this.grid[xPos][yPos]!==this.gridKey.START){
             this.grid[xPos][yPos] = this.gridKey.END;
             this.endPos = [xPos,yPos];
-            this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'#1111ff');
+            this.highlightCell(xPos*this.gridSize,yPos*this.gridSize,'blue');
         }
     }
 
