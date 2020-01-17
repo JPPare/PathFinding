@@ -1,6 +1,7 @@
-import PriorityQueue from "./priorityQueue";
-
-export default class DSP{
+import PriorityQueue from "./PriorityQueue";
+/*This is Dijkstra's shortest path. I called it basic search because the other searches are based on inheritance from this
+* class */
+export default class BasicSearch{
     constructor(board, searchMode = 2){
         //grid to hold distance from start to each node
         this.grid = new Array(board.rows).fill(null).map(() => new Array(board.cols).fill(null));
@@ -66,6 +67,7 @@ export default class DSP{
         neighbors = neighbors.filter((ele) =>{ // Get only the nodes whose paths would be shorter going through current, or who havent been seen yet.
             return (aNode.dist+1 < ele.dist || ele.dist === null)
         });
+
         for (let i of neighbors){ //Add neighbors to list.
             i.dist = aNode.dist + 1;
             this.grid[i.row][i.col] =i.dist;

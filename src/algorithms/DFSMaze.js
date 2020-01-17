@@ -1,25 +1,24 @@
 
 
-export default class dfsMaze{
+export default class DFSMaze{
     constructor(board){
         board.fillWalls();
         this.board = board;
         this.stack = [];
         this.start = [null,null];
-        this.directions = {
-            up: [[0,1],[0,2]],
-            down: [[0,-1],[0,-2]],
-            right: [[1,0], [2,0]],
-            left: [[-1,0], [-2,0]]
-        }
     }
+    reset(){
+        this.board.fillWalls();
+        this.stack = [];
+        this.start = [null,null];
+    }
+
     createMaze(){
         let row = Math.floor((Math.random()*(this.board.rows-1)));
         if(row % 2 ===0){row += (row > (this.board.rows/2)) ? -1 : 1} //Want an odd number. If even adjust by 1 towards middle of board so we dont go out of bounds
         let col = Math.floor((Math.random()*(this.board.cols-1)));
         if(col % 2 ===0){col += (col > (this.board.cols/2)) ? -1 : 1}
         this.start = [row,col];
-        //this.board.highlightCell(this.start[0] * this.board.gridSize, this.start[1] * this.board.gridSize, '#00ccff');
         this.board.clearCell(row,col);
         this.stack.push(this.start);
         this.genMaze(1);
@@ -80,8 +79,7 @@ export default class dfsMaze{
         }
     }
 
-    genMaze(x){
-        //if(x>50){return;}
+    genMaze(){
         if(this.board.running === false){return;}
         let currNode = this.stack[this.stack.length-1];
         let nextNodes = this.getDirections(currNode);
@@ -94,7 +92,7 @@ export default class dfsMaze{
             this.stack.push([nextNodes.end[0],nextNodes.end[1]]);
         }
         if(this.stack.length > 0){
-            window.requestAnimationFrame(()=>this.genMaze(x+1));
+            window.requestAnimationFrame(()=>this.genMaze());
         }
     }
     //Random start point & mark as open

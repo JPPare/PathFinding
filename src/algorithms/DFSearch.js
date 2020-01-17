@@ -1,7 +1,7 @@
-import PriorityQueue from "./priorityQueue";
-import dijsktra from "./dijsktra";
+import PriorityQueue from "./PriorityQueue";
+import BasicSearch from "./BasicSearch";
 
-export default class DFS extends dijsktra {
+export default class DepthFirstSearch extends BasicSearch {
 
     constructor(board, searchMode) {
         super(board, searchMode);
@@ -9,7 +9,6 @@ export default class DFS extends dijsktra {
             return a.dist > b.dist;
         };
     }
-
 
     processNeighbors(neighborArr, aNode) {
         let neighbors = neighborArr.map(ele => { // Convert the array into nodes

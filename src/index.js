@@ -1,7 +1,7 @@
 
-import Board from "./components/board";
-import NavBar from "./components/navBar";
-import DSP from "./algorithms/dijsktra";
+import Board from "./components/Board";
+import NavBar from "./components/NavBar";
+import BasicSearch from "./algorithms/BasicSearch";
 
 //Get gameScreen area and get height and width from it
 let canvas = document.getElementById("gameScreen");
@@ -13,6 +13,7 @@ let border = (canvas.offsetHeight-height)/2;
 let mDown = 0;
 
 let board = new Board(canvas, width, height, 10);
+let navBarJs = new NavBar(board);
 board.drawInitBoard();
 
 //Canvas Event Listeners
@@ -38,4 +39,4 @@ canvas.addEventListener("mousedown", ()=>{mDown = 1;});
 canvas.addEventListener("mouseup", ()=>{mDown = 0;});
 
 //NavBar Event Listener
-navBar.addEventListener("click", (event)=>NavBar.handleInput(event,board));
+navBar.addEventListener("click", (event)=>navBarJs.handleInput(event));

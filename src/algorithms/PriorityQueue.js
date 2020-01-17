@@ -1,6 +1,10 @@
+
+/*This implementation of a priority queue uses an array based heap and
+supports custom comparators as its only argument. */
+
 export default class PriorityQueue{
     constructor(comparator = (a,b)=>{return a < b;}){
-        this.heap = [null];
+        this.heap = [null]; //First element is null so array based math can start at 1
         this.comparator = comparator;
     }
     isEmpty(){
